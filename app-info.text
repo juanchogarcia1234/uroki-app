@@ -1,0 +1,18 @@
+ACTIONS
+- log in
+- add new course
+- cancel lesson
+- add payment
+- move lesson
+- delete course
+- delete student
+- add student
+- log out
+
+STATE
+- courses
+- lesson in a course
+- students
+- cancelled lessons
+- payments
+- moved lessons
