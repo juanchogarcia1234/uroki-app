@@ -1,0 +1,9 @@
+body {
+}
+
+.container {
+  background-color: aqua;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}

@@ -8,6 +8,8 @@ ACTIONS
 - delete student
 - add student
 - log out
+- recover cancelled lesson
+- postpone course
 
 STATE
 - courses
