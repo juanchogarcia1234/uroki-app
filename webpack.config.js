@@ -7,16 +7,16 @@ module.exports = {
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js"
+    filename: "bundle.js",
   },
   devServer: {
     open: true,
-    host: "localhost"
+    host: "localhost",
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "index.html"
-    })
+      template: "index.html",
+    }),
 
     // Add your plugins here
     // Learn more obout plugins from https://webpack.js.org/configuration/plugins/
@@ -26,23 +26,23 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: "babel-loader"
+        use: "babel-loader",
       },
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"] // <------
+        use: ["style-loader", "css-loader"], // <------
       },
       {
         test: /\.s[ac]ss$/i,
-        use: ["style-loader", "css-loader", "sass-loader"]
+        use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/,
-        type: "asset"
-      }
+        type: "asset",
+      },
 
       // Add your rules for custom modules here
       // Learn more about loaders from https://webpack.js.org/loaders/
-    ]
-  }
+    ],
+  },
 };
