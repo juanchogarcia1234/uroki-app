@@ -1,0 +1,14 @@
+.ui-login {
+  font-weight: 900;
+  width: 500px;
+  background-color: blueviolet;
+  margin-top: 50vh;
+}
+
+.ui.header > img {
+  width: 150px !important;
+}
+
+.errorMessage {
+  display: block !important;
+}

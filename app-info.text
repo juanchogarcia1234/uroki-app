@@ -1,5 +1,6 @@
-ACTIONS
-- log in
+ACTIONS CREATORS
+- log in (async) OK
+- log out OK
 - add new course
 - cancel lesson
 - add payment
@@ -7,9 +8,24 @@ ACTIONS
 - delete course
 - delete student
 - add student
-- log out
 - recover cancelled lesson
 - postpone course
+
+REDUCERS
+- For handling user login and logout
+  const userAuth = (oldToken = null, action) => {
+    if (action.type === 'LOG_IN) {
+      //WE CARE
+      return action.payload.token
+    } elseif (action.type === 'LOG_OUT) {
+      //WE CARE
+      return null
+    } else {
+      //DONT CARE
+      return oldToken
+    }
+  }
+
 
 STATE
 - courses
@@ -18,3 +34,5 @@ STATE
 - cancelled lessons
 - payments
 - moved lessons
+- access token
+- logged user
