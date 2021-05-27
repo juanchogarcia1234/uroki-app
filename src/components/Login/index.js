@@ -8,12 +8,11 @@ import { logIn } from "../../actions";
 
 //This is a container component
 class Login extends React.Component {
-  onFormSubmit = (user, password) => {
-    this.props.logIn(user, password);
+  onFormSubmit = (user, password, mensajeError) => {
+    this.props.logIn(user, password, mensajeError);
   };
 
   render() {
-    console.log("properties", this.props);
     return (
       <div className="container">
         <LoginForm onFormSubmit={this.onFormSubmit} />

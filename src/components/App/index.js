@@ -1,39 +1,21 @@
 import React from "react";
-import { Link, Route, Switch, Redirect, Router } from "react-router-dom";
+import { Link, Route, Switch, Redirect, Router, IndexRoute } from "react-router-dom";
 import { connect } from "react-redux";
 import uroki from "../../api/uroki";
 import Dashboard from "../Dashboard";
 import Login from "../Login";
 import history from "../../history";
+import Moved from "../Dashboard/Moved";
+import Cancelled from "../Dashboard/Cancelled";
+import Calendar from "../Dashboard/Calendar";
 
 class App extends React.Component {
-  //CAMBIAR A mapstateToProps este estado debería estar en redux porque se va a hacer uso de esta data en varias partes de la aplicación o lo tengo que guardas solo en localStorage?
-  componentDidMount() {
-    uroki.get("/users").then(function (response) {
-      // handle success
-      console.log(response);
-    });
-  }
-
   render() {
-    console.log("funciona bien", this.props.token);
     return (
       <Router history={history}>
         <Switch>
-          <Route path="/login" exact>
-            <Login />
-          </Route>
-          <Route path="/" exact>
-            {this.props.token ? (
-              <Dashboard />
-            ) : (
-              <Redirect
-                to={{
-                  pathname: "/login"
-                }}
-              />
-            )}
-          </Route>
+          <Route path="/" exact component={this.props.token ? Dashboard : Login} />
+          <Route path="/login" exact component={Login} />
         </Switch>
       </Router>
     );

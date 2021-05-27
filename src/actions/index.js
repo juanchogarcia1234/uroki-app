@@ -1,24 +1,21 @@
 import uroki from "../api/uroki";
 import history from "../history";
+import { formatDateToDB } from "../helpers";
 
-export const logIn = (user, password) => {
+export const logIn = (user, password, mensajeError) => {
   return async function (dispatch, getState, extraArgument) {
     const response = await uroki.post("/auth", {
       user,
       password
     });
-    if (response.data === "") {
-      console.log("no user");
-      console.log(document.getElementById("errorMessage"));
-      document.getElementById("errorMessage").classList.add("errorMessage");
+    if (response.data === null) {
+      mensajeError.current.style.display = "block";
       return;
     }
     //Después de esto los componentes se renderizan de nuevo?
     dispatch({
-      type: "LOG_IN",
-      payload: {
-        token: response.data
-      }
+      type: "LOGGED_IN",
+      payload: response.data
     });
     history.push("/");
   };
@@ -26,9 +23,28 @@ export const logIn = (user, password) => {
 
 export const logOut = () => {
   return {
-    type: "LOG_OUT",
-    payload: {
-      token: null
-    }
+    type: "LOGGED_OUT",
+    payload: null
+  };
+};
+
+export const fetchClasses = (week, token) => {
+  console.log("semanita", week);
+  let dates = week.map(day => formatDateToDB(day));
+
+  console.log("dates", dates);
+
+  return async function (dispatch, getState, extraArgument) {
+    const response = await uroki.get(`/classes?dates=${dates}`, {
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    });
+    console.log("las clases", response.data);
+
+    dispatch({
+      type: "FETCHED_CLASSES",
+      payload: response.data
+    });
   };
 };

@@ -11,6 +11,11 @@ class LoginForm extends Component {
     password: ""
   };
 
+  constructor(props) {
+    super(props);
+    this.mensajeError = React.createRef();
+  }
+
   onChangeUser = e => {
     this.setState({ userName: e.target.value });
   };
@@ -40,12 +45,12 @@ class LoginForm extends Component {
                   <input type="password" name="password" placeholder="Пароль" onChange={e => this.onChangePassword(e)} value={this.state.password} />
                 </div>
               </div>
-              <div className="ui fluid large blue submit button" onClick={() => this.props.onFormSubmit(this.state.userName, this.state.password)}>
+              <div className="ui fluid large blue submit button" onClick={() => this.props.onFormSubmit(this.state.userName, this.state.password, this.mensajeError)}>
                 Войти
               </div>
             </div>
 
-            <div id="errorMessage" className="ui error message">
+            <div ref={this.mensajeError} className="ui error message">
               Неправильные данные
             </div>
           </form>

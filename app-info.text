@@ -1,6 +1,6 @@
 ACTIONS CREATORS
-- log in (async) OK
-- log out OK
+- log in (async) -- OK
+- log out -- OK
 - add new course
 - cancel lesson
 - add payment
@@ -10,14 +10,15 @@ ACTIONS CREATORS
 - add student
 - recover cancelled lesson
 - postpone course
+- load classes
 
 REDUCERS
 - For handling user login and logout
   const userAuth = (oldToken = null, action) => {
-    if (action.type === 'LOG_IN) {
+    if (action.type === 'LOGGED_IN) {
       //WE CARE
       return action.payload.token
-    } elseif (action.type === 'LOG_OUT) {
+    } elseif (action.type === 'LOGGED_OUT) {
       //WE CARE
       return null
     } else {
@@ -36,3 +37,18 @@ STATE
 - moved lessons
 - access token
 - logged user
+
+QUERIES
+
+1) Search classes in certain week
+
+SELECT courses.paid, classes.start_time, classes.done, classes.moved, classes.cancelled, courses.student_id, classes.date FROM classes
+JOIN courses ON courses.id = classes.course_id
+WHERE classes.date >= 'May 15 2021' 
+ AND  classes.date <=  'May 17 2021'
+ AND courses.student_id = ${decode.sub}
+ tambien tengo que hacer un join para coger el paid y el student id
+
+ COLORS
+
+ current day #8caaff
