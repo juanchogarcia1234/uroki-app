@@ -13,10 +13,18 @@ class App extends React.Component {
   render() {
     return (
       <Router history={history}>
-        <Switch>
-          <Route path="/" exact component={this.props.token ? Dashboard : Login} />
-          <Route path="/login" exact component={Login} />
-        </Switch>
+        <Route path="/" exact>
+          {this.props.token ? (
+            <Dashboard />
+          ) : (
+            <Redirect
+              to={{
+                pathname: "/login"
+              }}
+            />
+          )}
+        </Route>
+        <Route path="/login" exact component={Login} />
       </Router>
     );
   }

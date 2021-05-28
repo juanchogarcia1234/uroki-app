@@ -13,6 +13,7 @@ class Login extends React.Component {
   };
 
   render() {
+    console.log("props de Login", this.props);
     return (
       <div className="container">
         <LoginForm onFormSubmit={this.onFormSubmit} />

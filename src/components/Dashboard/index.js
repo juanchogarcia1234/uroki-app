@@ -10,7 +10,7 @@ import { Route, Switch } from "react-router-dom";
 
 class Dashboard extends Component {
   render() {
-    console.log(this.props.children);
+    console.log("props de Dsahboars", this.props);
     return (
       <div className="dashboard">
         <Header />
