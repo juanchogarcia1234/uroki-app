@@ -56,3 +56,7 @@ div[data-minutes="30"] > div {
 div[data-minutes="45"] > div {
   top: 75%;
 }
+
+.spinner-container {
+  position: relative;
+}

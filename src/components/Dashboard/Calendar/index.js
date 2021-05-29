@@ -7,6 +7,7 @@ import { fetchClasses } from "../../../actions/index";
 import { connect } from "react-redux";
 import { formatDateFromDB, formatHour } from "../../../helpers";
 import Info from "../Info";
+import Spinner from "../../Spinner/Spinner";
 
 class Calendar extends Component {
   hours = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"];
@@ -112,55 +113,58 @@ class Calendar extends Component {
     return (
       <>
         <Info />
-        <table className="ui celled center aligned unstackable table day eight column">
-          <thead>
-            <tr>
-              <th colSpan="8">
-                <span className="link">
-                  {capitalize(this.getCurrentMonthName(this.state.currentMonth))} {this.state.currentYear}
-                </span>
-                <span
-                  className="prev link"
-                  onClick={() => {
-                    this.setState({ currentWeek: this.genNextWeek("previous") }, () => {
-                      this.props.fetchClasses(this.state.currentWeek, this.props.token);
-                    });
-                  }}
-                >
-                  <i className="chevron left icon"></i>
-                </span>
-                <span
-                  className="next link"
-                  onClick={() => {
-                    this.setState({ currentWeek: this.genNextWeek("next") }, () => {
-                      this.props.fetchClasses(this.state.currentWeek, this.props.token);
-                    });
-                  }}
-                >
-                  <i className="chevron right icon"></i>
-                </span>
-              </th>
-            </tr>
-            <tr>
-              <th></th>
-              {this.showCalendarHeader()}
-            </tr>
-          </thead>
-          <tbody>
-            {this.hours.map(hour => (
-              <tr key={hour} id={hour}>
-                <td>{hour}</td>
-                {this.state.currentWeek.map(day => {
-                  return (
-                    <td key={day} id={day} className={format(day, "E d y") === format(this.state.currentDay, "E d y") ? "current" : ""}>
-                      {this.props.classes.map(lesson => this.checkClassInDay(hour, day, lesson))}
-                    </td>
-                  );
-                })}
+        <div className="spinner-container">
+          <table className="ui celled center aligned unstackable table day eight column">
+            <thead>
+              <tr>
+                <th colSpan="8">
+                  <span className="link">
+                    {capitalize(this.getCurrentMonthName(this.state.currentMonth))} {this.state.currentYear}
+                  </span>
+                  <span
+                    className="prev link"
+                    onClick={() => {
+                      this.setState({ currentWeek: this.genNextWeek("previous") }, () => {
+                        this.props.fetchClasses(this.state.currentWeek, this.props.token);
+                      });
+                    }}
+                  >
+                    <i className="chevron left icon"></i>
+                  </span>
+                  <span
+                    className="next link"
+                    onClick={() => {
+                      this.setState({ currentWeek: this.genNextWeek("next") }, () => {
+                        this.props.fetchClasses(this.state.currentWeek, this.props.token);
+                      });
+                    }}
+                  >
+                    <i className="chevron right icon"></i>
+                  </span>
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+              <tr>
+                <th></th>
+                {this.showCalendarHeader()}
+              </tr>
+            </thead>
+            <tbody>
+              {this.hours.map(hour => (
+                <tr key={hour} id={hour}>
+                  <td>{hour}</td>
+                  {this.state.currentWeek.map(day => {
+                    return (
+                      <td key={day} id={day} className={format(day, "E d y") === format(this.state.currentDay, "E d y") ? "current" : ""}>
+                        {this.props.classes.map(lesson => this.checkClassInDay(hour, day, lesson))}
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <Spinner />
+        </div>
       </>
     );
   }

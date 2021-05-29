@@ -10,16 +10,8 @@ import { Route, Switch } from "react-router-dom";
 
 class Dashboard extends Component {
   render() {
-    console.log("props de Dsahboars", this.props);
-    return (
-      <div className="dashboard">
-        <Header />
-        <Menu />
-        <div className="dashboard-container">
-          <Calendar />
-        </div>
-      </div>
-    );
+    console.log(this.props.children);
+    return <Calendar />;
   }
 }
 
