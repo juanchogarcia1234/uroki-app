@@ -19,7 +19,7 @@ class Menu extends React.Component {
         </NavLink>
         <NavLink
           className="item"
-          to="/cancelled"
+          to="/otmenennye"
           activeStyle={{
             fontWeight: "bold"
           }}
@@ -29,7 +29,7 @@ class Menu extends React.Component {
         </NavLink>
         <NavLink
           className="item"
-          to="/movidas"
+          to="/perenesennye"
           activeStyle={{
             fontWeight: "bold"
           }}

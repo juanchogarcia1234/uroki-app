@@ -12,10 +12,10 @@ export const AppRoutes = () => {
         <Route path="/" exact>
           <Dashboard />
         </Route>
-        <Route path="/movidas" exact>
+        <Route path="/perenesennye" exact>
           <Moved />
         </Route>
-        <Route path="/cancelled" exact>
+        <Route path="/otmenennye" exact>
           <Cancelled />
         </Route>
       </Switch>

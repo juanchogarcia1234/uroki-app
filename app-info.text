@@ -52,3 +52,11 @@ WHERE classes.date >= 'May 15 2021'
  COLORS
 
  current day #8caaff
+
+ 2) Add classes numbering
+
+Pone limite de 8 a la secuencia
+ALTER SEQUENCE classes_class_number_seq MAXVALUE 8
+
+Reinicia la secuencia de clases con 0
+ ALTER SEQUENCE classes_class_number_seq RESTART WITH 1

@@ -8,10 +8,9 @@ import { connect } from "react-redux";
 import { formatDateFromDB, formatHour } from "../../../helpers";
 import Info from "../Info";
 import Spinner from "../../Spinner/Spinner";
+import { months, hours } from "../../../constants";
 
 class Calendar extends Component {
-  hours = ["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"];
-  months = ["январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь "];
   state = {
     currentMonth: getMonth(new Date()),
     currentYear: getYear(new Date()),
@@ -29,7 +28,7 @@ class Calendar extends Component {
   }
 
   getCurrentMonthName(month) {
-    return Array.isArray(month) ? this.months[month[0]] + " - " + capitalize(this.months[month[1]]) : this.months[month];
+    return Array.isArray(month) ? months[month[0]] + " - " + capitalize(months[month[1]]) : months[month];
   }
 
   getCurrentYear(week) {
@@ -86,7 +85,7 @@ class Calendar extends Component {
     return (
       <div className="presentation" key={urok.date} data-minutes={startTime}>
         <div className="ui raised  text  segment urok">
-          Урок 1
+          Урок {urok.class_number}/8
           <div className="icons">
             <i className={`check icon ${urok.done ? "green" : "grey"}`}></i>
             <i className={`share icon ${urok.moved ? "blue" : "grey"}`}></i>
@@ -149,7 +148,7 @@ class Calendar extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.hours.map(hour => (
+              {hours.map(hour => (
                 <tr key={hour} id={hour}>
                   <td>{hour}</td>
                   {this.state.currentWeek.map(day => {
@@ -163,7 +162,7 @@ class Calendar extends Component {
               ))}
             </tbody>
           </table>
-          <Spinner />
+          {this.props.dataStatus ? <Spinner /> : null}
         </div>
       </>
     );
@@ -171,7 +170,7 @@ class Calendar extends Component {
 }
 
 const mapStateToProps = state => {
-  return { token: state.token, classes: state.classes };
+  return { token: state.token, classes: state.classes, dataStatus: state.dataStatus };
 };
 
 export default connect(mapStateToProps, { fetchClasses })(Calendar);

@@ -2,9 +2,7 @@ import { createAction, createActions } from "redux-actions";
 import uroki from "../api/uroki";
 import history from "../history";
 import { formatDateToDB } from "../helpers";
-
-const exampleActionCreator = createAction("ACTION_CALLED");
-console.log(exampleActionCreator("este es el payload"));
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const logIn = (user, password, mensajeError) => {
   return async function (dispatch, getState, extraArgument) {
@@ -25,17 +23,22 @@ export const logIn = (user, password, mensajeError) => {
   };
 };
 
+export const fetchClassesStart = createAction("FETCH_CLASSES_STARTED");
+export const fetchClassesSucces = createAction("FETCH_CLASSES_SUCCED");
+
 export const logOut = createAction("LOGGED_OUT");
 
 export const fetchClasses = (week, token) => {
   let dates = week.map(day => formatDateToDB(day));
 
   return async function (dispatch, getState, extraArgument) {
+    dispatch(fetchClassesStart());
     const response = await uroki.get(`/classes?dates=${dates}`, {
       headers: {
         "Authorization": `Bearer ${token}`
       }
     });
+    dispatch(fetchClassesSucces());
 
     dispatch({
       type: "FETCHED_CLASSES",
