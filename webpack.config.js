@@ -12,7 +12,8 @@ module.exports = {
   devServer: {
     open: true,
     host: "localhost",
-    historyApiFallback: true //Do not fallback to /index.html for Single Page Applications.
+    historyApiFallback: true, //Do not fallback to /index.html for Single Page Applications.
+    port: 9000
   },
   plugins: [
     new HtmlWebpackPlugin({
